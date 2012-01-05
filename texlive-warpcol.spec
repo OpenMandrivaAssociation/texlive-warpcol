@@ -6,7 +6,7 @@
 # catalog-version 1.0c
 Name:		texlive-warpcol
 Version:	1.0c
-Release:	1
+Release:	2
 Summary:	Relative alignment of rows in numeric columns in tabulars
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/warpcol
