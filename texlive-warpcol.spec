@@ -1,52 +1,27 @@
-Name:		texlive-warpcol
-Version:	77677
-Release:	1
+%global tl_name warpcol
+%global tl_revision 79618
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	1.0c
+Release:	%{tl_revision}.1
 Summary:	Relative alignment of rows in numeric columns in tabulars
 Group:		Publishing
 URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/warpcol
-License:	LPPL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/warpcol.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/warpcol.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/warpcol.source.r%{version}.tar.xz
+License:	lppl1
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/warpcol.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/warpcol.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/warpcol.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+BuildSystem:	texlive
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-Defines a tabular column type for formatting numerical columns
-in LaTeX. The column type enables numerical items to be right
-justified relative to each other, while centred beneath the
-column label. In addition, macros are provided to enable
-variations on this column type to be defined. Usage of the
-package is superficially similar to that of dcolumn; however,
-the alignment scheme is different, and the packages have
-different, though overlapping, applications.
+Defines a tabular column type for formatting numerical columns in LaTeX.
+The column type enables numerical items to be right justified relative
+to each other, while centred beneath the column label. In addition,
+macros are provided to enable variations on this column type to be
+defined. Usage of the package is superficially similar to that of
+dcolumn; however, the alignment scheme is different, and the packages
+have different, though overlapping, applications.
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%{_texmfdistdir}/tex/latex/warpcol/warpcol.sty
-%doc %{_texmfdistdir}/doc/latex/warpcol/README
-%doc %{_texmfdistdir}/doc/latex/warpcol/warpcol.pdf
-#- source
-%doc %{_texmfdistdir}/source/latex/warpcol/warpcol.dtx
-%doc %{_texmfdistdir}/source/latex/warpcol/warpcol.ins
-
-#-----------------------------------------------------------------------
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -fpar tex doc source %{buildroot}%{_texmfdistdir}
